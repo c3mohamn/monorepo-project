@@ -28,6 +28,9 @@
     },
     "durotar-ssr": {
       "tags": []
+    },
+    "core": {
+      "tags": []
     }
   }
 }
