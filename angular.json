@@ -213,7 +213,7 @@
       },
       "root": "apps/mulgore",
       "sourceRoot": "apps/mulgore/src",
-      "prefix": "monorepo-project",
+      "prefix": "app",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
