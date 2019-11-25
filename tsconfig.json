@@ -16,7 +16,9 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@monorepo-project/api-interfaces": ["libs/api-interfaces/src/index.ts"]
+      "@monorepo-project/api-interfaces": ["libs/api-interfaces/src/index.ts"],
+      "@monorepo-project/mulgore": ["apps/mulgore/src/app"],
+      "@monorepo-project/durotar": ["apps/duortar/src/app"]
     }
   },
   "exclude": ["node_modules", "tmp"]
