@@ -19,6 +19,15 @@
     },
     "api-interfaces": {
       "tags": []
+    },
+    "mulgore-e2e": {
+      "tags": []
+    },
+    "mulgore": {
+      "tags": []
+    },
+    "server-durotar-ssr": {
+      "tags": []
     }
   }
 }
