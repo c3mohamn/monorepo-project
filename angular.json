@@ -23,7 +23,8 @@
             "aot": false,
             "assets": [
               "apps/durotar/src/favicon.ico",
-              "apps/durotar/src/assets"
+              "apps/durotar/src/assets",
+              "apps/durotar/src/manifest.webmanifest"
             ],
             "styles": ["apps/durotar/src/styles.scss"],
             "scripts": []
@@ -56,7 +57,9 @@
                   "maximumWarning": "6kb",
                   "maximumError": "10kb"
                 }
-              ]
+              ],
+              "serviceWorker": true,
+              "ngswConfigPath": "apps/durotar/ngsw-config.json"
             }
           }
         },
@@ -357,22 +360,6 @@
       "prefix": "durotar-ssr",
       "schematics": {},
       "architect": {
-        "serve-all": {
-          "builder": "@angular-devkit/architect:concat",
-          "options": {
-            "targets": [
-              {
-                "target": "durotar:build"
-              },
-              {
-                "target": "durotar:server"
-              },
-              {
-                "target": "durotar-ssr:serve"
-              }
-            ]
-          }
-        },
         "build": {
           "builder": "@nrwl/node:build",
           "options": {
