@@ -378,13 +378,23 @@
         }
       }
     },
-    "server-durotar-ssr": {
+    "durotar-ssr": {
       "root": "apps/server/durotar-ssr",
       "sourceRoot": "apps/server/durotar-ssr/src",
       "projectType": "application",
-      "prefix": "server-durotar-ssr",
+      "prefix": "durotar-ssr",
       "schematics": {},
       "architect": {
+        "serve-all": {
+          "builder": "@angular-devkit/architect:concat",
+          "options": { 
+            "targets": [
+              { "target": "durotar:build" },
+              { "target": "durotar:server" },
+              { "target": "durotar-ssr:serve" }
+            ]
+          }
+        },
         "build": {
           "builder": "@nrwl/node:build",
           "options": {
@@ -412,7 +422,7 @@
         "serve": {
           "builder": "@nrwl/node:execute",
           "options": {
-            "buildTarget": "server-durotar-ssr:build"
+            "buildTarget": "durotar-ssr:build"
           }
         },
         "lint": {
