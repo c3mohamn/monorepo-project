@@ -10,7 +10,7 @@
       },
       "root": "apps/durotar",
       "sourceRoot": "apps/durotar/src",
-      "prefix": "monorepo-project",
+      "prefix": "app",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
@@ -200,6 +200,129 @@
           "options": {
             "jestConfig": "libs/api-interfaces/jest.config.js",
             "tsConfig": "libs/api-interfaces/tsconfig.spec.json"
+          }
+        }
+      }
+    },
+    "mulgore": {
+      "projectType": "application",
+      "schematics": {
+        "@nrwl/angular:component": {
+          "style": "scss"
+        }
+      },
+      "root": "apps/mulgore",
+      "sourceRoot": "apps/mulgore/src",
+      "prefix": "monorepo-project",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/apps/mulgore",
+            "index": "apps/mulgore/src/index.html",
+            "main": "apps/mulgore/src/main.ts",
+            "polyfills": "apps/mulgore/src/polyfills.ts",
+            "tsConfig": "apps/mulgore/tsconfig.app.json",
+            "aot": false,
+            "assets": [
+              "apps/mulgore/src/favicon.ico",
+              "apps/mulgore/src/assets"
+            ],
+            "styles": ["apps/mulgore/src/styles.scss"],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "apps/mulgore/src/environments/environment.ts",
+                  "with": "apps/mulgore/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb",
+                  "maximumError": "10kb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "mulgore:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "mulgore:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "mulgore:build"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "apps/mulgore/tsconfig.app.json",
+              "apps/mulgore/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!apps/mulgore/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "apps/mulgore/jest.config.js",
+            "tsConfig": "apps/mulgore/tsconfig.spec.json",
+            "setupFile": "apps/mulgore/src/test-setup.ts"
+          }
+        }
+      }
+    },
+    "mulgore-e2e": {
+      "root": "apps/mulgore-e2e",
+      "sourceRoot": "apps/mulgore-e2e/src",
+      "projectType": "application",
+      "architect": {
+        "e2e": {
+          "builder": "@nrwl/cypress:cypress",
+          "options": {
+            "cypressConfig": "apps/mulgore-e2e/cypress.json",
+            "tsConfig": "apps/mulgore-e2e/tsconfig.e2e.json",
+            "devServerTarget": "mulgore:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "mulgore:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": ["apps/mulgore-e2e/tsconfig.e2e.json"],
+            "exclude": ["**/node_modules/**", "!apps/mulgore-e2e/**"]
           }
         }
       }
