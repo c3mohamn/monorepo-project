@@ -18,7 +18,8 @@
     "paths": {
       "@monorepo-project/api-interfaces": ["libs/api-interfaces/src/index.ts"],
       "@monorepo-project/mulgore": ["apps/mulgore/src/app"],
-      "@monorepo-project/durotar": ["apps/duortar/src/app"]
+      "@monorepo-project/durotar": ["apps/duortar/src/app"],
+      "@monorepo-project/core": ["libs/core/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]
