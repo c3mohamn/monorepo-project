@@ -9,7 +9,7 @@ import { DurotarComponent } from './durotar/durotar.component';
 
 @NgModule({
   declarations: [AppComponent, DurotarComponent],
-  imports: [BrowserModule, HttpClientModule, AppRoutingModule],
+  imports: [BrowserModule.withServerTransition({ appId: 'serverApp' }), HttpClientModule, AppRoutingModule],
   providers: [],
   bootstrap: [AppComponent]
 })

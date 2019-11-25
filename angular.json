@@ -25,7 +25,9 @@
               "apps/durotar/src/favicon.ico",
               "apps/durotar/src/assets"
             ],
-            "styles": ["apps/durotar/src/styles.scss"],
+            "styles": [
+              "apps/durotar/src/styles.scss"
+            ],
             "scripts": []
           },
           "configurations": {
@@ -85,7 +87,10 @@
               "apps/durotar/tsconfig.app.json",
               "apps/durotar/tsconfig.spec.json"
             ],
-            "exclude": ["**/node_modules/**", "!apps/durotar/**"]
+            "exclude": [
+              "**/node_modules/**",
+              "!apps/durotar/**"
+            ]
           }
         },
         "test": {
@@ -94,6 +99,29 @@
             "jestConfig": "apps/durotar/jest.config.js",
             "tsConfig": "apps/durotar/tsconfig.spec.json",
             "setupFile": "apps/durotar/src/test-setup.ts"
+          }
+        },
+        "server": {
+          "builder": "@angular-devkit/build-angular:server",
+          "options": {
+            "outputPath": "dist/apps/durotar/server",
+            "main": "apps/durotar/src/main.server.ts",
+            "tsConfig": "apps/durotar/tsconfig.server.json"
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "apps/durotar/src/environments/environment.ts",
+                  "with": "apps/durotar/src/environments/environment.prod.ts"
+                }
+              ],
+              "sourceMap": false,
+              "optimization": {
+                "scripts": false,
+                "styles": true
+              }
+            }
           }
         }
       }
@@ -119,8 +147,13 @@
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
-            "tsConfig": ["apps/durotar-e2e/tsconfig.e2e.json"],
-            "exclude": ["**/node_modules/**", "!apps/durotar-e2e/**"]
+            "tsConfig": [
+              "apps/durotar-e2e/tsconfig.e2e.json"
+            ],
+            "exclude": [
+              "**/node_modules/**",
+              "!apps/durotar-e2e/**"
+            ]
           }
         }
       }
@@ -138,7 +171,9 @@
             "outputPath": "dist/apps/api",
             "main": "apps/api/src/main.ts",
             "tsConfig": "apps/api/tsconfig.app.json",
-            "assets": ["apps/api/src/assets"]
+            "assets": [
+              "apps/api/src/assets"
+            ]
           },
           "configurations": {
             "production": {
@@ -167,7 +202,10 @@
               "apps/api/tsconfig.app.json",
               "apps/api/tsconfig.spec.json"
             ],
-            "exclude": ["**/node_modules/**", "!apps/api/**"]
+            "exclude": [
+              "**/node_modules/**",
+              "!apps/api/**"
+            ]
           }
         },
         "test": {
@@ -192,7 +230,10 @@
               "libs/api-interfaces/tsconfig.lib.json",
               "libs/api-interfaces/tsconfig.spec.json"
             ],
-            "exclude": ["**/node_modules/**", "!libs/api-interfaces/**"]
+            "exclude": [
+              "**/node_modules/**",
+              "!libs/api-interfaces/**"
+            ]
           }
         },
         "test": {
@@ -228,7 +269,9 @@
               "apps/mulgore/src/favicon.ico",
               "apps/mulgore/src/assets"
             ],
-            "styles": ["apps/mulgore/src/styles.scss"],
+            "styles": [
+              "apps/mulgore/src/styles.scss"
+            ],
             "scripts": []
           },
           "configurations": {
@@ -287,7 +330,10 @@
               "apps/mulgore/tsconfig.app.json",
               "apps/mulgore/tsconfig.spec.json"
             ],
-            "exclude": ["**/node_modules/**", "!apps/mulgore/**"]
+            "exclude": [
+              "**/node_modules/**",
+              "!apps/mulgore/**"
+            ]
           }
         },
         "test": {
@@ -321,8 +367,72 @@
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
-            "tsConfig": ["apps/mulgore-e2e/tsconfig.e2e.json"],
-            "exclude": ["**/node_modules/**", "!apps/mulgore-e2e/**"]
+            "tsConfig": [
+              "apps/mulgore-e2e/tsconfig.e2e.json"
+            ],
+            "exclude": [
+              "**/node_modules/**",
+              "!apps/mulgore-e2e/**"
+            ]
+          }
+        }
+      }
+    },
+    "server-durotar-ssr": {
+      "root": "apps/server/durotar-ssr",
+      "sourceRoot": "apps/server/durotar-ssr/src",
+      "projectType": "application",
+      "prefix": "server-durotar-ssr",
+      "schematics": {},
+      "architect": {
+        "build": {
+          "builder": "@nrwl/node:build",
+          "options": {
+            "outputPath": "dist/apps/server/durotar-ssr",
+            "main": "apps/server/durotar-ssr/src/main.ts",
+            "tsConfig": "apps/server/durotar-ssr/tsconfig.app.json",
+            "assets": [
+              "apps/server/durotar-ssr/src/assets"
+            ]
+          },
+          "configurations": {
+            "production": {
+              "optimization": true,
+              "extractLicenses": true,
+              "inspect": false,
+              "fileReplacements": [
+                {
+                  "replace": "apps/server/durotar-ssr/src/environments/environment.ts",
+                  "with": "apps/server/durotar-ssr/src/environments/environment.prod.ts"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@nrwl/node:execute",
+          "options": {
+            "buildTarget": "server-durotar-ssr:build"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "apps/server/durotar-ssr/tsconfig.app.json",
+              "apps/server/durotar-ssr/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**",
+              "!apps/server/durotar-ssr/**"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "apps/server/durotar-ssr/jest.config.js",
+            "tsConfig": "apps/server/durotar-ssr/tsconfig.spec.json"
           }
         }
       }
